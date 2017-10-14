@@ -34,8 +34,8 @@ cd $APP_HOME
 mkdir -p logs
 
 jar_home=.
-main=com.gome.cs.member.MemberAccessServer
-module=member-access-service-1.2.1-SNAPSHOT.jar
+main=com.qnym.business.LoginServer
+module=qnym-service-1.0.0-SNAPSHOT.jar
 pidfile=logs/app.pid
 logfile=logs/info.`date +%F`.log
 JAVA_OPTS="-server -Xms2048m -Xmx2048m -XX:NewSize=256m -XX:MaxNewSize=512m -Xss512k"
