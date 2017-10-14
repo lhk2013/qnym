@@ -1,4 +1,4 @@
-package com.qnym.service.repository.entity;
+package com.qnym.business.repository.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
