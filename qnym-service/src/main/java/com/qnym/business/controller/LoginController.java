@@ -1,5 +1,6 @@
 package com.qnym.business.controller;
 
+import com.qnym.business.domain.LoginUserInfo;
 import com.qnym.business.repository.entity.User;
 import com.qnym.business.service.UserService;
 import com.qnym.common.domain.CommonResponse;
@@ -31,7 +32,7 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public CommonResponse login(@RequestBody User loginUser,HttpServletRequest request,HttpServletResponse response){
+    public CommonResponse login(@RequestBody LoginUserInfo loginUser,HttpServletRequest request,HttpServletResponse response){
         CommonResponse result = null;
         logger.info("login time {} ",System.currentTimeMillis());
         if(loginUser==null){
