@@ -7,6 +7,8 @@ import com.qnym.common.domain.CommonResponse;
 import com.qnym.common.domain.LoginStatus;
 import com.qnym.common.util.CookieOperator;
 import com.qnym.common.util.SerializableUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.net.URLEncoder;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by liuhaikuo on 2017/10/13.
  */
 @RestController
+@Api(description = "登录业务")
 public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -32,6 +35,7 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ApiOperation("用户登录")
     public CommonResponse login(@RequestBody LoginUserInfo loginUser,HttpServletRequest request,HttpServletResponse response){
         CommonResponse result = null;
         logger.info("login time {} ",System.currentTimeMillis());
@@ -74,6 +78,7 @@ public class LoginController {
         return result;
     }
     @RequestMapping(value = "/login2",method = RequestMethod.GET)
+    @ApiOperation("用户登录v2")
     public CommonResponse login2(String account,String pwd,HttpServletRequest request,HttpServletResponse response){
         CommonResponse result = null;
         User loginUser = new User();
