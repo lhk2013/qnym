@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by liuhaikuo on 2017/10/13.
+ * @author liuhaikuo
  */
 @RestController
 @Api(description = "登录业务")
@@ -60,10 +61,10 @@ public class LoginController {
             //验证成功写入cookie
             String domain = request.getServerName();
             try {
-                String value = SerializableUtils.json.writeValueAsString(user);
+                String value = SerializableUtils.OBJECT_MAPPER.writeValueAsString(user);
                 logger.info("value {}",value);
                 Cookie cookie = CookieOperator.writeCookie(response,null,domain,user.getUserId().toString()+"|"+user.getNickName(),10);
-                String cookieCan = SerializableUtils.json.writeValueAsString(cookie);
+                String cookieCan = SerializableUtils.OBJECT_MAPPER.writeValueAsString(cookie);
                 logger.info("cookieCan {}",cookieCan);
                 result = new CommonResponse(LoginStatus.SUCCESS.getCode(), LoginStatus.SUCCESS.getMsg());
             }catch (Exception e){
@@ -106,11 +107,11 @@ public class LoginController {
             //验证成功写入cookie
             String domain = request.getServerName();
             try {
-                String value = SerializableUtils.json.writeValueAsString(user);
+                String value = SerializableUtils.OBJECT_MAPPER.writeValueAsString(user);
                 logger.info("value {}",value);
                 Cookie cookie = CookieOperator.writeCookie(response,null,domain,
                     user.getUserId().toString()+"|"+ URLEncoder.encode(user.getNickName(),"utf-8"),10);
-                String cookieCan = SerializableUtils.json.writeValueAsString(cookie);
+                String cookieCan = SerializableUtils.OBJECT_MAPPER.writeValueAsString(cookie);
                 logger.info("cookieCan {}",cookieCan);
                 result = new CommonResponse(LoginStatus.SUCCESS.getCode(), LoginStatus.SUCCESS.getMsg());
             }catch (Exception e){

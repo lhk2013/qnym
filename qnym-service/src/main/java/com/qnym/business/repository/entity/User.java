@@ -10,6 +10,7 @@ import lombok.Data;
 
 /**
  * Created by liuhaikuo on 2017/10/13.
+ * @author liuhaikuo
  */
 @Entity
 @Table(name = "t_user")

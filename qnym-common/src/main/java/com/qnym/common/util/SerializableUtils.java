@@ -3,11 +3,14 @@ package com.qnym.common.util;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * @author liuhaikuo
+ */
 public class SerializableUtils {
 
-	public final static ObjectMapper json = new ObjectMapper();
+	public final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	static {
-		json.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 }

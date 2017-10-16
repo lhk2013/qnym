@@ -5,6 +5,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author liuhaikuo
+ */
 public class CookieOperator {
 
 	public static final String LOGIN_COOKIE_HEAD = "QNYM-UID";

@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * Created by liuhaikuo on 2017/10/16.
+ * @author liuhaikuo
  */
 @Data
 public class LoginUserInfo {

@@ -17,6 +17,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author liuhaikuo
+ */
+
 @SpringBootApplication
 @EnableSwagger2
 @ImportResource({"/spring-mvc.xml"})

@@ -2,6 +2,7 @@ package com.qnym.common.domain;
 
 /**
  * Created by liuhaikuo on 2017/10/14.
+ * @author liuhaikuo
  */
 public class LoginStatus {
     public final static HttpStatusNode SUCCESS = new HttpStatusNode(200, "ok");
