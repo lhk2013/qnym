@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by liuhaikuo on 2017/10/16.
  */
-public class TestF {
+public class TestRSA {
 
-    private static Logger logger = LoggerFactory.getLogger(TestF.class);
+    private static Logger logger = LoggerFactory.getLogger(TestRSA.class);
 
     @Test
     public  void compare(){
@@ -44,7 +44,7 @@ public class TestF {
         logger.info("private_key: {}",priKey);
 
         byte[] rsaAcc = RSAUtils.encryptByPublicKey(accout.getBytes(),pubKey);
-        byte[] rsaPwd = RSAUtils.encryptByPublicKey(accout.getBytes(),pubKey);
+        byte[] rsaPwd = RSAUtils.encryptByPublicKey(pwd.getBytes(),pubKey);
         String acc1 = RSAUtils.encryptBASE64(rsaAcc);
         String pwd1 = RSAUtils.encryptBASE64(rsaPwd);
         logger.info(acc1);
