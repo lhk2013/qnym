@@ -15,4 +15,10 @@ public interface UserRepostory extends JpaRepository<User,Long>{
      * @return
      */
     User findByAccount(String account);
+    /**
+     * 根据手机号查询用户信息
+     * @param account
+     * @return
+     */
+    User findByPhone(String account);
 }

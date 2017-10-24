@@ -12,9 +12,9 @@ import lombok.Data;
  * Created by liuhaikuo on 2017/10/13.
  * @author liuhaikuo
  */
+@Data
 @Entity
 @Table(name = "t_user")
-@Data
 public class User {
 
     @Id
@@ -29,5 +29,9 @@ public class User {
     @Column(name = "nick_name")
     private String nickName;
 
+    /**
+     * 绑定手机 一个手机只能被一个账户绑定 可以用来登录
+     */
     private String phone;
+
 }

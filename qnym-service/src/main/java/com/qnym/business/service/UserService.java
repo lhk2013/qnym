@@ -14,4 +14,10 @@ public interface UserService {
      * @return
      */
     User findUserByAccount(String account);
+    /**
+     * 根据手机号查询用户信息
+     * @param phone
+     * @return
+     */
+    User findUserByPhone(String phone);
 }

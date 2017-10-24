@@ -43,7 +43,7 @@ public class LoginServer {
 	@SuppressWarnings("unchecked")
 	private Predicate<String> loginPath() {
 		//此处使用正则 注意正则范围
-		return Predicates.or(PathSelectors.regex(".*login.*"));
+		return Predicates.or(PathSelectors.regex(".*.*"));
 	}
 	private ApiInfo einvoiceApiInfo() {
 		return new ApiInfoBuilder().title("qnym相关api").description("提供登录验证相关业务")

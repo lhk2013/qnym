@@ -20,4 +20,9 @@ public class UserServiceImpl implements UserService{
     public User findUserByAccount(String account) {
         return userRepostory.findByAccount(account);
     }
+
+    @Override
+    public User findUserByPhone(String phone) {
+        return userRepostory.findByPhone(phone);
+    }
 }
