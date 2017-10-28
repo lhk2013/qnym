@@ -10,4 +10,6 @@ public interface IDCardService {
     IDCard findByUserId(Long userId);
 
     IDCard findByIdNumber(String idNumber);
+
+    Integer updateStatus(Integer status,String idNumber);
 }

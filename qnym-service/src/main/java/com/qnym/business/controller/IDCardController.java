@@ -1,16 +1,20 @@
 package com.qnym.business.controller;
 
+import com.qnym.business.domain.IDCardInfo;
 import com.qnym.business.repository.entity.IDCard;
 import com.qnym.business.repository.entity.User;
 import com.qnym.business.service.IDCardService;
 import com.qnym.business.service.UserService;
 import com.qnym.common.domain.CommonResponse;
+import com.qnym.common.domain.IDCardStatus;
+import com.qnym.common.domain.WebResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +41,8 @@ public class IDCardController {
 
     @RequestMapping(value = "/find",method = RequestMethod.GET)
     @ApiOperation("查询身份证状态")
-    public CommonResponse find(@RequestParam (required = false) String phone,@RequestParam(required = false) String idnum,HttpServletRequest request,HttpServletResponse response){
-        CommonResponse result = null;
+    public WebResponse<IDCardInfo> find(@RequestParam (required = false) String phone,@RequestParam(required = false) String idnum,HttpServletRequest request,HttpServletResponse response){
+        WebResponse result = null;
         IDCard idCard = null;
         if(!StringUtils.isEmpty(phone)){
             User user = userService.findUserByPhone(phone);
@@ -49,8 +53,28 @@ public class IDCardController {
         if(!StringUtils.isEmpty(idnum)){
             idCard = idCardService.findByIdNumber(idnum);
         }
-        result = new CommonResponse();
-        result.setData(idnum);
+        if (idCard !=null){
+            IDCardInfo idCardInfo= new IDCardInfo();
+            BeanUtils.copyProperties(idCard,idCardInfo);
+            result = new WebResponse<IDCardInfo>(idCardInfo);
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/modStatus",method = RequestMethod.GET)
+    @ApiOperation("修改状态")
+    public CommonResponse modStatus(@RequestParam(required = true) String idnum,@RequestParam(required = true) Integer status,HttpServletRequest request,HttpServletResponse response){
+        CommonResponse result = new CommonResponse();
+
+        if(!StringUtils.isEmpty(idnum)) {
+            Integer count = idCardService.updateStatus(status, idnum);
+
+        }else {
+            result.setRpco (IDCardStatus.UPDATE_FAIL.getCode());
+            result.setMsg(IDCardStatus.UPDATE_FAIL.getMsg());
+        }
+
         return result;
     }
 }

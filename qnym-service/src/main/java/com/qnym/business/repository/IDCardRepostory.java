@@ -2,6 +2,9 @@ package com.qnym.business.repository;
 
 import com.qnym.business.repository.entity.IDCard;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by liuhaikuo on 2017/10/14.
@@ -15,5 +18,12 @@ public interface IDCardRepostory extends JpaRepository<IDCard,String>{
      * @return
      */
     IDCard findByUserId(Long userId);
+    /**
+     * 更新状态
+     */
+    @Modifying
+    @Query("update IDCard ic set ic.status = ?1 where ic.idNumber = ?2")
+    @Transactional
+    Integer updateStatus(Integer status,String idNumber);
 
 }

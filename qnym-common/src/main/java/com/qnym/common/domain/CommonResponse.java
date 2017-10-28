@@ -18,9 +18,9 @@ public class CommonResponse {
      */
     private String msg;
 
-    private String data;
-
     public CommonResponse() {
+        super();
+        this.rpco = 200;
     }
     /**
      * @param rpco
