@@ -33,13 +33,18 @@ public class TestRSA {
 
     @Test
     public  void testRSA()throws Exception{
-        String accout = "lhk2013";
-        String pwd = "lhk1990211";
+        String accout = "18519192264";
+        String pwd = "jinzi521";
         Map<String, byte[]> mp =  RSAUtils.initKey();
         String pubKey = new String(RSAUtils.encryptBASE64(mp.get(RSAUtils.PUBLIC_KEY)));
         String priKey = new String(RSAUtils.encryptBASE64(mp.get(RSAUtils.PRIVATE_KEY)));
 
         logger.info("ff: {}",new String(mp.get(RSAUtils.PUBLIC_KEY)));
+        pubKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCj3yzxhwMrf8VlrQv5tUYGTF5V" +
+                "uGZMqnNwQPH7woUkr1pPBv3kceno5y9F2HggCMa2YO2JTiMkn7p/BEhGL9dvoZvL" +
+                "+S60rljL95Z+7kIJkzIFHzKEC9Tw+tobeTErn7tEBGxOe+oLH4hDN4PB8j3YPg9j" +
+                "zCRjOXEArXA2DbJwAwIDAQAB";
+        priKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKPfLPGHAyt/xWWtC/m1RgZMXlW4Zkyqc3BA8fvChSSvWk8G/eRx6ejnL0XYeCAIxrZg7YlOIySfun8ESEYv12+hm8v5LrSuWMv3ln7uQgmTMgUfMoQL1PD62ht5MSufu0QEbE576gsfiEM3g8HyPdg+D2PMJGM5cQCtcDYNsnADAgMBAAECgYBmSnBWj+2FoKtKjZt1ExeT5OXZ4lJRNvD6OEAU5FaSELdxry6bBBR74puaoMZTUMchnx2HYPQE74PNt5GZ5lE2iGMU0IuynA+j7omQ+386kqbA4zWLxNwFVk7iXWmbLioXwOUBLWYNdNCjgbaSZG7eEu16kqxIe01l9NXlSnX3UQJBANl7hYR1AqkG3LosSOq2/b9m1uftDwfz2k4N4zTnOCatMv3I0X5W/GxR9W3grDKaORFYmEam76XcdNSbPg0kYssCQQDA5PzV2wkzGCAGR9cGw7wvZkH8CEfzRCEhNCuGJv3H6F0juFhS13fwKy6HHCde2SdtRbBEj2KlPytrUkyMiKipAkAcaM9TMznKvLO+uiQ4TPkutI9kMophHpCo25WPhpjGLJ/ZmQ8Msu48dCRcWxoDbjQAORODPzFU+ExmrXTYoKUrAkEAjHi1n09pfan9+FTsxGJacvI270FglElzDukdIQ7YFXKkEVU4DOwYze/EbGQWT744Nh1f5i29GrXL+tXuJRGIMQJAO9gJYui2YxDHaolwGS4OlESt7YQwjffmKMbMWKIdn+mZJYZAZquRJadD2ErrYLJcfagAzTXgXSczBKzNDMcrag==";
         logger.info("public_key: {}",pubKey);
         logger.info("private_key: {}",priKey);
 
@@ -47,8 +52,8 @@ public class TestRSA {
         byte[] rsaPwd = RSAUtils.encryptByPublicKey(pwd.getBytes(),pubKey);
         String acc1 = RSAUtils.encryptBASE64(rsaAcc);
         String pwd1 = RSAUtils.encryptBASE64(rsaPwd);
-        logger.info(acc1);
-        logger.info(pwd1);
+        logger.info("en account {}",acc1);
+        logger.info("en pwd {}",pwd1);
 
         byte[] deRsaAcc=RSAUtils.decryptByPrivateKey(RSAUtils.decryptBASE64(acc1),priKey);
         byte[] deRsaPwd=RSAUtils.decryptByPrivateKey(RSAUtils.decryptBASE64(pwd1),priKey);
