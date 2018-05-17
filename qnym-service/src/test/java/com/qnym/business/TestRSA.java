@@ -1,7 +1,14 @@
 package com.qnym.business;
 
 import com.qnym.common.util.RSAUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import com.qnym.inf.dubbo.domain.UserInfo;
+import io.swagger.models.auth.In;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +79,20 @@ public class TestRSA {
         String pwd2 = new String(deRsaPwd);
 
         logger.info("f decode {}",pwd2);
+        List<? extends Number> list = new ArrayList<Double>();
+        List<? extends Integer> list2 = new ArrayList<Integer>();
+        List<? super Integer> list3 = new ArrayList<Number>();
+        List<? extends Number> list4 = new ArrayList<Integer>();
+
+        key = "1";
+        int h;
+//        long ss = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        h = key.hashCode();
+        long ss = h>>16;
+        logger.error(">>>>>>>:{}",ss);
+        UserInfo userInfo =null;
+        Optional<String>  s2 = Optional.ofNullable(userInfo).map(UserInfo::getAccount);
+        logger.info(s2.orElse(null));
 
     }
 
