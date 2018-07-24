@@ -26,7 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by liuhaikuo on 2017/10/13.
  * @author liuhaikuo
  */
-@RestController("idcard")
+@RestController
+@RequestMapping("idcard")
 @Api(description = "身份证查询")
 public class IDCardController {
 
@@ -77,4 +78,5 @@ public class IDCardController {
 
         return result;
     }
+
 }

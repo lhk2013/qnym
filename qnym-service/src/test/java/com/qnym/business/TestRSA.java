@@ -1,5 +1,12 @@
 package com.qnym.business;
 
+import com.fosun.channel.util.security.rsa.MD5;
+import com.fosun.channel.util.security.rsa.RSAGenUtil;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.qnym.common.util.RSA;
 import com.qnym.common.util.RSAUtils;
 
 import java.util.ArrayList;
@@ -96,4 +103,56 @@ public class TestRSA {
 
     }
 
+    @Test
+    public void testRSAVerify()throws Exception{
+        String pubKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIYwQBaw8sxuB5/XDJMuudBRcZij" +
+                "T9Q00EecLvPNXxOiHlrc+wyKlufB8E05HKze/HJ1dsgc8PJ0PiaNJXs87xTtHb/bdOEvivXuXpb2" +
+                "bvkUaC6GeGfVjLdJWPMS1XFmUOx62tyeE1x7b7r8D93lSuhdFd3rXBWMJVnGSYYwUpGrAgMBAAEC" +
+                "gYBW/81taMfiFqxGy2xRuIesMkGODsPg92TaKL6gPtSXrBI2IvN5TBlOpQShbJfU1LWjl9itIWZu" +
+                "K0NoRza30efHHUn+DJEgDpE5eDKRuQYq2WzHM99AyLWAYGgfvTiEfJ/AQikaS32Plj6NK3AJvR2d" +
+                "aDhOMSrJ/ZQIQO/QLx0nsQJBANHpQw5npZcV9CHA7jnActy+VWddbYngMJwqyfmdjsUzi+Oy2LnL" +
+                "fy0NBMhwkMhi0/t02Co9L0lkk8AvGNoBo28CQQCjpr+jbJ2yEUH+F61FLwBC30LzqasqB2Zb9gTq" +
+                "p+1Mdnsf9m1ZTFECrN7MPSv+K9IrDoeI8CzPiCPZvDCvOWeFAkB3e4cn0+d1sJFeBSuUw+6dp9mF" +
+                "FLEdIfeJbPG6m+yAY27lFRA38ZVaV2a5kRlYdqijIUdKA7m+1PklE6nZrcURAkEAnFt9Tg9AvBlx" +
+                "C+xjSG6XuUzHEzdQql9XlRWBrRG00BGDog44e9FGtV+ln03y8m276BeBt3yB0+cnGamMel5GYQJA" +
+                "X6FPar3izMyAPpKdNyVERdd9QehPVu4VK9PC8mlMNpN/zOtIX4S+OQdMDdHRARllQ0S3FMfwPvRI" +
+                "0bPUNgIfpg==";
+        String content ="{\"respCode\":\"000000\",\"respMsg\":\"SUCCESS\",\"loanNoticeList\":[{\"idNo\":\"320106199002030190\",\"idType\":\"01\",\"loanAmt\":180.00,\"refOrderId\":\"fs000000344\",\"status\":\"00\",\"planList\":[{\"termInt\":2.16,\"termPri\":180.00,\"termPint\":0.00,\"termSum\":182.16,\"repayDate\":\"20180817\"}],\"loanTime\":\"2018-07-19 14:07:91\",\"loanAppTime\":\"2018-07-19 14:07:00\",\"loanDays\":\"31\",\"cino\":\"20180719IALI00000163018\",\"channelNo\":\"YYW001\"}],\"channelNo\":\"YYW001\"}\n";
+        String sign = "2844E9A73D7A95D05DD28C62ADB49DF285F05F9835D05F6B40AC08D8837428F8B2F55653C272FA03C9A375963736DE4BBF45A6F8FB8DB6A4460E7C0DD03161AA9AA2BB7230F12E67A279B42441170780E1720E8AE3694C03FC925C5504D9AA7B6B4BD40AE2603642A29C6613CBFBCAB21D347734EB8A75559E06F150D00BBBFA";
+        boolean res1 = RSA.verify(content,sign,pubKey,"UTF-8");
+//        boolean res2 = RSAUtils.verify(content.getBytes("UTF-8"),pubKey,sign);
+        logger.info("res1 {}",res1);
+//        logger.info("res2 {}",res2);
+
+    }
+
+    @Test
+    public void testRSAVerify2()throws Exception{
+        String pubKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGMEAWsPLMbgef1wyTLrnQUXGYo0/UNNBHnC7z\n" +
+                "zV8Toh5a3PsMipbnwfBNORys3vxydXbIHPDydD4mjSV7PO8U7R2/23ThL4r17l6W9m75FGguhnhn\n" +
+                "1Yy3SVjzEtVxZlDsetrcnhNce2+6/A/d5UroXRXd61wVjCVZxkmGMFKRqwIDAQAB";
+        String content ="{\"channelNo\":\"YYW001\",\"loanNoticeList\":[{\"channelNo\":\"YYW001\",\"cino\":\"20180719IALI00000349341\",\"idNo\":\"320106199002030190\",\"idType\":\"01\",\"loanAmt\":180.00,\"loanAppTime\":\"2018-07-19 19:07:00\",\"loanDays\":\"30\",\"loanTime\":\"2018-07-19 19:07:137\",\"planList\":[{\"repayDate\":\"20190220\",\"termInt\":2.16,\"termPint\":0.00,\"termPri\":180.00,\"termSum\":182.16}],\"refOrderId\":\"fs000000402\",\"status\":\"00\"}],\"respCode\":\"000000\",\"respMsg\":\"SUCCESS\"}";
+                String sign = "61503507E66D4C3B8497B953F3BB2C6EF3F3C4371056B7D860B87B996C1472D83BA76D7B0DD99228B6ECF03822FA52252A66CB8CB667B7D7AC329159026F9B8E26F62934ACB9E24D63B79FDEF2B7BF1344840D2E48B378400FF306F1F1BFCF6E8B8BD12B82CC66FFBC23C205F888BC9C8E7CC9153D9A5C10F7482372BE7660FB";
+//        boolean res1 = RSA.verify(content,sign,pubKey,"UTF-8");
+//        boolean res2 = RSAUtils.verify(content.getBytes("UTF-8"),pubKey,sign);
+//        logger.info("res1 {}",res1);
+//        logger.info("res2 {}",res2);
+
+        String md5SenderValue=    MD5.md5(content);
+
+        logger.error("md5SenderValue {}",md5SenderValue);
+        String md5RecieverValue = RSAGenUtil.decryptByPubText(sign,pubKey);
+        logger.error("md5RecieverValue {}",md5RecieverValue);
+
+        logger.info("valid restult {}",md5RecieverValue.equals(md5SenderValue));
+
+        String body = "{\"requestBody\":{\"channelNo\":\"YYW001\",\"loanNoticeList\":[{\"channelNo\":\"YYW001\",\"cino\":\"20180719IALI00000349341\",\"idNo\":\"320106199002030190\",\"idType\":\"01\",\"loanAmt\":180.00,\"loanAppTime\":\"2018-07-19 19:07:00\",\"loanDays\":\"30\",\"loanTime\":\"2018-07-19 19:07:137\",\"planList\":[{\"repayDate\":\"20190220\",\"termInt\":2.16,\"termPint\":0.00,\"termPri\":180.00,\"termSum\":182.16}],\"refOrderId\":\"fs000000402\",\"status\":\"00\"}],\"respCode\":\"000000\",\"respMsg\":\"SUCCESS\"},\"requestHead\":{\"channelNo\":\"YYW001\",\"sign\":\"61503507E66D4C3B8497B953F3BB2C6EF3F3C4371056B7D860B87B996C1472D83BA76D7B0DD99228B6ECF03822FA52252A66CB8CB667B7D7AC329159026F9B8E26F62934ACB9E24D63B79FDEF2B7BF1344840D2E48B378400FF306F1F1BFCF6E8B8BD12B82CC66FFBC23C205F888BC9C8E7CC9153D9A5C10F7482372BE7660FB\"}}";
+//        JsonElement jsonElement = new Gson().toJsonTree(body);
+        JsonObject jsonObject = new JsonParser().parse(body).getAsJsonObject();
+        content = jsonObject.get("requestBody").toString();
+        String md5SenderValue2=    MD5.md5(content);
+
+        logger.info("valid restult {}",md5RecieverValue.equals(md5SenderValue2));
+
+    }
 }
