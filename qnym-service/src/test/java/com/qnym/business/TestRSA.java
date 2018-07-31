@@ -1,5 +1,6 @@
 package com.qnym.business;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fosun.channel.util.security.rsa.MD5;
 import com.fosun.channel.util.security.rsa.RSAGenUtil;
 import com.google.gson.Gson;
@@ -128,31 +129,34 @@ public class TestRSA {
 
     @Test
     public void testRSAVerify2()throws Exception{
-        String pubKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGMEAWsPLMbgef1wyTLrnQUXGYo0/UNNBHnC7z\n" +
-                "zV8Toh5a3PsMipbnwfBNORys3vxydXbIHPDydD4mjSV7PO8U7R2/23ThL4r17l6W9m75FGguhnhn\n" +
-                "1Yy3SVjzEtVxZlDsetrcnhNce2+6/A/d5UroXRXd61wVjCVZxkmGMFKRqwIDAQAB";
-        String content ="{\"channelNo\":\"YYW001\",\"loanNoticeList\":[{\"channelNo\":\"YYW001\",\"cino\":\"20180719IALI00000349341\",\"idNo\":\"320106199002030190\",\"idType\":\"01\",\"loanAmt\":180.00,\"loanAppTime\":\"2018-07-19 19:07:00\",\"loanDays\":\"30\",\"loanTime\":\"2018-07-19 19:07:137\",\"planList\":[{\"repayDate\":\"20190220\",\"termInt\":2.16,\"termPint\":0.00,\"termPri\":180.00,\"termSum\":182.16}],\"refOrderId\":\"fs000000402\",\"status\":\"00\"}],\"respCode\":\"000000\",\"respMsg\":\"SUCCESS\"}";
-                String sign = "61503507E66D4C3B8497B953F3BB2C6EF3F3C4371056B7D860B87B996C1472D83BA76D7B0DD99228B6ECF03822FA52252A66CB8CB667B7D7AC329159026F9B8E26F62934ACB9E24D63B79FDEF2B7BF1344840D2E48B378400FF306F1F1BFCF6E8B8BD12B82CC66FFBC23C205F888BC9C8E7CC9153D9A5C10F7482372BE7660FB";
-//        boolean res1 = RSA.verify(content,sign,pubKey,"UTF-8");
-//        boolean res2 = RSAUtils.verify(content.getBytes("UTF-8"),pubKey,sign);
-//        logger.info("res1 {}",res1);
-//        logger.info("res2 {}",res2);
+        String resXml ="{\"requestHead\":{\"channelNo\":\"YYW001\",\"sign_type\":\"RSA\",\"sign\":\"0AC4BF34E211B49DF2907D60DE0489A2504200FDCBF6F9F5B3B9D8554B99F63AC6AA80E327C7F4823F6AF6A219A5484A55BAF16D632779F37038D14C599D394C2C1D57D21F3BFFAD4050F4A030095EAF2E93759037D4C36919DE6D84DCA47C3C374F9563B9289DE9E9F010300E4F01B00D74164AE9E9EC2FBF2FF84BACC4E4BF\",\"reqTime\":\"20180727052743\"},\"requestBody\":{\"channelNo\":\"YYW001\",\"projectNo\":\"101003YYW01\",\"refOrderId\":\"ZFFS20180727172631132697478\",\"loanAmt\":293.00,\"status\":\"999999\"}}";
+        String sign = "0AC4BF34E211B49DF2907D60DE0489A2504200FDCBF6F9F5B3B9D8554B99F63AC6AA80E327C7F4823F6AF6A219A5484A55BAF16D632779F37038D14C599D394C2C1D57D21F3BFFAD4050F4A030095EAF2E93759037D4C36919DE6D84DCA47C3C374F9563B9289DE9E9F010300E4F01B00D74164AE9E9EC2FBF2FF84BACC4E4BF";
 
-        String md5SenderValue=    MD5.md5(content);
+        boolean res = verifySign(resXml,sign);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ res:{}",res);
 
-        logger.error("md5SenderValue {}",md5SenderValue);
-        String md5RecieverValue = RSAGenUtil.decryptByPubText(sign,pubKey);
-        logger.error("md5RecieverValue {}",md5RecieverValue);
 
-        logger.info("valid restult {}",md5RecieverValue.equals(md5SenderValue));
+    }
 
-        String body = "{\"requestBody\":{\"channelNo\":\"YYW001\",\"loanNoticeList\":[{\"channelNo\":\"YYW001\",\"cino\":\"20180719IALI00000349341\",\"idNo\":\"320106199002030190\",\"idType\":\"01\",\"loanAmt\":180.00,\"loanAppTime\":\"2018-07-19 19:07:00\",\"loanDays\":\"30\",\"loanTime\":\"2018-07-19 19:07:137\",\"planList\":[{\"repayDate\":\"20190220\",\"termInt\":2.16,\"termPint\":0.00,\"termPri\":180.00,\"termSum\":182.16}],\"refOrderId\":\"fs000000402\",\"status\":\"00\"}],\"respCode\":\"000000\",\"respMsg\":\"SUCCESS\"},\"requestHead\":{\"channelNo\":\"YYW001\",\"sign\":\"61503507E66D4C3B8497B953F3BB2C6EF3F3C4371056B7D860B87B996C1472D83BA76D7B0DD99228B6ECF03822FA52252A66CB8CB667B7D7AC329159026F9B8E26F62934ACB9E24D63B79FDEF2B7BF1344840D2E48B378400FF306F1F1BFCF6E8B8BD12B82CC66FFBC23C205F888BC9C8E7CC9153D9A5C10F7482372BE7660FB\"}}";
-//        JsonElement jsonElement = new Gson().toJsonTree(body);
-        JsonObject jsonObject = new JsonParser().parse(body).getAsJsonObject();
-        content = jsonObject.get("requestBody").toString();
-        String md5SenderValue2=    MD5.md5(content);
+    private boolean verifySign(String resXml,String sign){
 
-        logger.info("valid restult {}",md5RecieverValue.equals(md5SenderValue2));
-
+        String pubKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCA4utt3Ky+6hY0XFMfniwxJBr6IduY4YJbw6wb3YyM0eY2FJcgguWwjRTK593jRgYFcDsHmMGoFrJUSp28YmAs9S88V1YG4UTLzsv7eDAZKX4o9IUcFWjYffenNCwsr2hmYXiud2BW5V8w4ZDCCJ7eFYCwpKjGhNnAjmh2LYfsvwIDAQAB";
+        logger.info("resXml {} ",resXml);
+        JsonObject jsonObject = new JsonParser().parse(resXml).getAsJsonObject();
+        String content = jsonObject.get("requestBody").toString();
+        logger.info("验证签名==================");
+        logger.info("content: {}",content);
+        logger.info("sign: {}",sign);
+        boolean res = false;
+        try {
+            logger.info("md5SenderValue index content : ",resXml.indexOf(content));
+            String md5SenderValue= MD5.md5(content);
+            String md5RecieverValue = RSAGenUtil.decryptByPubText(sign,pubKey);
+            res = md5SenderValue.equals(md5RecieverValue);
+            logger.info("md5SenderValue:{} md5RecieverValue:{}  valid restult {}",md5SenderValue,md5RecieverValue,res);
+        }catch (Exception e){
+            logger.error("res2 error",e);
+        }
+        return res;
     }
 }
