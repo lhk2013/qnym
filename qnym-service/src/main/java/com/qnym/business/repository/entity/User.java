@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * Created by liuhaikuo on 2017/10/13.
  * @author liuhaikuo
@@ -28,6 +30,16 @@ public class User {
 
     @Column(name = "nick_name")
     private String nickName;
+
+
+    @Column(name = "create_time")
+    private Date createTime;
+
+
+    @Column(name = "create_time_stamp")
+    private Long createTimeStamp;
+
+    private Integer status;
 
     /**
      * 绑定手机 一个手机只能被一个账户绑定 可以用来登录

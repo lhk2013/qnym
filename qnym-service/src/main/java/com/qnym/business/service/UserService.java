@@ -20,4 +20,13 @@ public interface UserService {
      * @return
      */
     User findUserByPhone(String phone);
+
+    /**
+     * 添加
+     * @param user
+     */
+    User save(User user);
+
+    User save();
+
 }
