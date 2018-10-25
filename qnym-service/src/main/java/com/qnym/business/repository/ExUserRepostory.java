@@ -25,4 +25,9 @@ public interface ExUserRepostory extends JpaRepository<ExUser,Long>{
     @Query(value = "update ExUser e set e.result=?1 where e.id = ?2")
     int updateResultById( String result,  Long id);
 
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value = "update ExUser e set e.cinfo=?1 where e.id = ?2")
+    int updateCinfoById( String cinfo,  Long id);
+
 }

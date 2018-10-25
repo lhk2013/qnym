@@ -18,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by liuhaikuo on 2017/10/28.
@@ -65,12 +67,12 @@ public class TestUser {
         String cookie = "PHPSESSID_SUSERP=qjfb05th1eubei07l9f2v2jre3;td_cookie=18446744070499707755";
 
         List<ExUser> list = exUserService.listAll();
-        list.clear();
-        ExUser exUser1= new ExUser();
-        exUser1.setMob("13917411153");
-        exUser1.setName("樊韫杰");
-        exUser1.setId(332L);
-        list.add(exUser1);
+//        list.clear();
+//        ExUser exUser1= new ExUser();
+//        exUser1.setMob("13917411153");
+//        exUser1.setName("樊韫杰");
+//        exUser1.setId(332L);
+//        list.add(exUser1);
         log.error(">>>>>>>>>>>>>当前数据 {}条",list.size());
         int index = 0;
         Random random = new Random();
@@ -101,7 +103,7 @@ public class TestUser {
             exUser.setResult(content);
             exUserService.updateResultById(exUser.getResult(),exUser.getId());
             index++;
-            Thread.sleep(random.nextInt(500));
+            Thread.sleep(random.nextInt(300));
             log.info("done 条 用户id:{} 手机号:{} 姓名:{} ",index,exUser.getId(),exUser.getMob(),exUser.getName());
 
         }
@@ -116,29 +118,30 @@ public class TestUser {
     public  void testFindUser3()throws Exception{
 
         String url = "http://202.85.213.22:8090/admin.php?action=crm&oper=mobilesearch&ex=s";
-        String cookie = "PHPSESSID_SUSERP=tn06kj6t5p758h7ahan9nn68i4";
+        String cookie = "PHPSESSID_SUSERP=qjfb05th1eubei07l9f2v2jre3;td_cookie=18446744070499707755";
 
         List<ExUser> list = exUserService.listAll();
         log.error(">>>>>>>>>>>>>当前数据 {}条",list.size());
         int index = 0;
         Random random = new Random();
         for (ExUser exUser : list) {
+
             log.info("doing 用户id:{} 手机号:{} 姓名:{} ",exUser.getId(),exUser.getMob(),exUser.getName());
             Map<String,String> map = new HashMap<>();
-
-
-            map.put("mobile","15921080799");
-
-
-
-
-            String content = HttpUtils.doPostForm2(url,cookie,FormUtils.ParseFormForMap(map));
+            map.put("mobile",exUser.getMob());
+            String content = HttpUtils.doPostForm(url,cookie,FormUtils.ParseFormForMap(map));
             log.info("==================================>>");
             log.info("content:{}",content);
-            exUser.setResult(content);
-//            exUserService.updateResultById(exUser.getResult(),exUser.getId());
+            Pattern pattern = Pattern.compile("(([\\u4e00-\\u9fa5]|\\[|\\]|[1-9]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])\\s+(20|21|22|23|[0-1]\\d):[0-5]\\d:[0-5]\\d))");
+            Matcher matcher = pattern.matcher(content);
+            String ss2 ="";
+            while (matcher.find()) {
+                ss2 += matcher.group(1);
+            }
+            exUser.setCinfo(ss2);
+            exUserService.updateCinfoById(exUser.getCinfo(),exUser.getId());
             index++;
-            Thread.sleep(random.nextInt(500));
+            Thread.sleep(random.nextInt(300));
             log.info("done 条 用户id:{} 手机号:{} 姓名:{} ",index,exUser.getId(),exUser.getMob(),exUser.getName());
 
         }

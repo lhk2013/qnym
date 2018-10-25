@@ -27,4 +27,8 @@ public class ExUser {
     private String area;
 
     private String result;
+
+    private String cinfo;
+
+    private String ninfo;
 }

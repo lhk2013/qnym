@@ -15,4 +15,6 @@ public interface ExUserService {
 
     void updateResultById(String result,Long id);
 
+    void updateCinfoById(String result,Long id);
+
 }

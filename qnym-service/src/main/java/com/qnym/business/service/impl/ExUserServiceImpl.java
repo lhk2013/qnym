@@ -34,4 +34,9 @@ public class ExUserServiceImpl implements ExUserService {
     public void updateResultById(String result, Long id) {
          exUserRepostory.updateResultById(result,id);
     }
+
+    @Override
+    public void updateCinfoById(String cinfo, Long id) {
+        exUserRepostory.updateCinfoById(cinfo,id);
+    }
 }
