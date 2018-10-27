@@ -39,4 +39,9 @@ public class ExUserServiceImpl implements ExUserService {
     public void updateCinfoById(String cinfo, Long id) {
         exUserRepostory.updateCinfoById(cinfo,id);
     }
+
+    @Override
+    public List<ExUser> listByIdRange(long start, long end) {
+        return exUserRepostory.findExUsersByIdBetween(start,end);
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by liuhaikuo on 2017/10/14.
  * @author liuhaikuo
@@ -30,4 +32,10 @@ public interface ExUserRepostory extends JpaRepository<ExUser,Long>{
     @Query(value = "update ExUser e set e.cinfo=?1 where e.id = ?2")
     int updateCinfoById( String cinfo,  Long id);
 
+    @Override
+    List<ExUser> findAll();
+
+    List<ExUser> findExUsersByIdBetween(Long s,Long e);
+
+    List<ExUser> findExUsersByIdBetweenAndResultIsNotLike(Long s,Long e,String res);
 }

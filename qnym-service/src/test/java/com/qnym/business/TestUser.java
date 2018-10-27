@@ -64,9 +64,9 @@ public class TestUser {
     public  void testSaveUser2()throws Exception{
 
         String url = "http://202.85.213.22:8090/admin.php?action=crm&oper=crmadd&ex=i";
-        String cookie = "PHPSESSID_SUSERP=qjfb05th1eubei07l9f2v2jre3;td_cookie=18446744070499707755";
+        String cookie = "PHPSESSID_SUSERP=td33hd0ig7dpmgautgae5unog1;td_cookie=18446744070745592311";
 
-        List<ExUser> list = exUserService.listAll();
+        List<ExUser> list = exUserService.listByIdRange(4000L,5599L);
 //        list.clear();
 //        ExUser exUser1= new ExUser();
 //        exUser1.setMob("13917411153");
@@ -76,8 +76,15 @@ public class TestUser {
         log.error(">>>>>>>>>>>>>当前数据 {}条",list.size());
         int index = 0;
         Random random = new Random();
+//        list.clear();
         for (ExUser exUser : list) {
-            log.info("doing 用户id:{} 手机号:{} 姓名:{} ",exUser.getId(),exUser.getMob(),exUser.getName());
+
+            if(exUser.getResult().indexOf("邮箱格式错误")<0){
+                log.error("已经处理好 用户id:{} 手机号:{} 姓名:{} email:{} ",exUser.getId(),exUser.getMob(),exUser.getName(),exUser.getEmail());
+                continue;
+            }
+
+            log.error("doing 用户id:{} 手机号:{} 姓名:{} email:{} ",exUser.getId(),exUser.getMob(),exUser.getName(),exUser.getEmail());
             Map<String,String> map = new HashMap<>();
 
 
@@ -90,12 +97,11 @@ public class TestUser {
             map.put("firstsource","数据分配");
             map.put("sex","2");
             map.put("age","0");
+//            map.put("email",exUser.getEmail());
             map.put("reachedintent","");
             map.put("contactform","电话");
             map.put("nexttime","");
             map.put("contactplace","公司");
-
-
 
             String content = HttpUtils.doPostForm(url,cookie,FormUtils.ParseFormForMap(map));
             log.info("==================================>>");
@@ -103,7 +109,7 @@ public class TestUser {
             exUser.setResult(content);
             exUserService.updateResultById(exUser.getResult(),exUser.getId());
             index++;
-            Thread.sleep(random.nextInt(300));
+            Thread.sleep(random.nextInt(2000));
             log.info("done 条 用户id:{} 手机号:{} 姓名:{} ",index,exUser.getId(),exUser.getMob(),exUser.getName());
 
         }

@@ -26,9 +26,10 @@ public class ExUser {
 
     private String area;
 
+    private String email;
+
     private String result;
 
     private String cinfo;
 
-    private String ninfo;
 }

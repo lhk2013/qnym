@@ -17,4 +17,6 @@ public interface ExUserService {
 
     void updateCinfoById(String result,Long id);
 
+    List<ExUser> listByIdRange(long start,long end);
+
 }
