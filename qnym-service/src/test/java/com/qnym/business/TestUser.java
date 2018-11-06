@@ -66,7 +66,7 @@ public class TestUser {
         String url = "http://202.85.213.22:8090/admin.php?action=crm&oper=crmadd&ex=i";
         String cookie = "PHPSESSID_SUSERP=td33hd0ig7dpmgautgae5unog1;td_cookie=18446744070745592311";
 
-        List<ExUser> list = exUserService.listByIdRange(4000L,5599L);
+        List<ExUser> list = exUserService.listByIdRange(7200L,9999L);
 //        list.clear();
 //        ExUser exUser1= new ExUser();
 //        exUser1.setMob("13917411153");
@@ -124,7 +124,7 @@ public class TestUser {
     public  void testFindUser3()throws Exception{
 
         String url = "http://202.85.213.22:8090/admin.php?action=crm&oper=mobilesearch&ex=s";
-        String cookie = "PHPSESSID_SUSERP=qjfb05th1eubei07l9f2v2jre3;td_cookie=18446744070499707755";
+        String cookie = "PHPSESSID_SUSERP=td33hd0ig7dpmgautgae5unog1;td_cookie=18446744070745592311";
 
         List<ExUser> list = exUserService.listAll();
         log.error(">>>>>>>>>>>>>当前数据 {}条",list.size());
