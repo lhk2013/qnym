@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by liuhaikuo on 2017/10/13.
+ * Created by liuhaikuo on 2018/10/13.
  * @author liuhaikuo
  */
 @RestController
@@ -60,7 +60,7 @@ public class IDCardController {
             result = new WebResponse<IDCardInfo>(idCardInfo);
         }
 
-        return result;
+        return new WebResponse<>();
     }
 
     @RequestMapping(value = "/modStatus",method = RequestMethod.GET)

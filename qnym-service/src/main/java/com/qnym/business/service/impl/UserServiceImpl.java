@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Modifying
     public User save() {
         User user = null;
