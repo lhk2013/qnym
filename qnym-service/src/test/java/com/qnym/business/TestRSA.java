@@ -1,10 +1,10 @@
 package com.qnym.business;
 
-import com.alibaba.fastjson.JSONObject;
-import com.fosun.channel.util.security.rsa.MD5;
-import com.fosun.channel.util.security.rsa.RSAGenUtil;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
+//import com.alibaba.fastjson.JSONObject;
+//import com.fosun.channel.util.security.rsa.MD5;
+//import com.fosun.channel.util.security.rsa.RSAGenUtil;
+//import com.google.gson.Gson;
+//import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.qnym.common.util.RSA;
@@ -150,10 +150,10 @@ public class TestRSA {
         boolean res = false;
         try {
             logger.info("md5SenderValue index content : ",resXml.indexOf(content));
-            String md5SenderValue= MD5.md5(content);
-            String md5RecieverValue = RSAGenUtil.decryptByPubText(sign,pubKey);
-            res = md5SenderValue.equals(md5RecieverValue);
-            logger.info("md5SenderValue:{} md5RecieverValue:{}  valid restult {}",md5SenderValue,md5RecieverValue,res);
+//            String md5SenderValue= MD5.md5(content);
+//            String md5RecieverValue = RSAGenUtil.decryptByPubText(sign,pubKey);
+//            res = md5SenderValue.equals(md5RecieverValue);
+//            logger.info("md5SenderValue:{} md5RecieverValue:{}  valid restult {}",md5SenderValue,md5RecieverValue,res);
         }catch (Exception e){
             logger.error("res2 error",e);
         }
