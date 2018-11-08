@@ -49,4 +49,12 @@ public class User{
      */
     private String phone;
 
+    public User() {
+        super();
+    }
+
+    public User(String account, String nickName) {
+        this.account = account;
+        this.nickName = nickName;
+    }
 }
