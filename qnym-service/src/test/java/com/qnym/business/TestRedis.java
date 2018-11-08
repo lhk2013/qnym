@@ -44,12 +44,17 @@ public class TestRedis {
         User user=new User();
         user.setNickName("刘大叶");
         user.setPhone("19882811212");
+//        redisTemplate.setDefaultSerializer(null);
+//        redisTemplate.setValueSerializer(null);
         ValueOperations<String, User> operations=redisTemplate.opsForValue();
         operations.set("com.lhk", user);
-        operations.set("com.lhk.temp", user,1L, TimeUnit.SECONDS);
-        Thread.sleep(1000);
+        operations.set("com.lhk.temp", user,100L, TimeUnit.SECONDS);
+        operations.set("com.lhk1", user);
+        operations.set("com.lhk2", user);
+        operations.set("com.lhk3", user);
+//        Thread.sleep(1000);
         //redisTemplate.delete("com.neo.f");
-        boolean exists=redisTemplate.hasKey("com.neo.f");
+        boolean exists=redisTemplate.hasKey("com.lhk.temp");
         if(exists){
             System.out.println("exists is true");
         }else{

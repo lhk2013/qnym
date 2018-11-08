@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,7 +18,9 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "t_user")
-public class User {
+//public class User implements Serializable{
+public class User{
+
 
     @Id
     @Column(name = "user_id")
