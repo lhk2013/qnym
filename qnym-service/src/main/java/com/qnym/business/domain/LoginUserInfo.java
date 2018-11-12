@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class LoginUserInfo {
 
-    @ApiModelProperty(value = "账户",required = true)
+    @ApiModelProperty(value = "账户",required = true,example = "lhk2013",notes = "不要用中文")
     private String account;
 
     @ApiModelProperty(value = "密码",required = true)

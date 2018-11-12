@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by liuhaikuo on 2017/10/14.
+ * Created by liuhaikuo on 2018/10/14.
  * @author liuhaikuo
  */
 public interface IDCardRepostory extends JpaRepository<IDCard,String>{
