@@ -214,7 +214,8 @@ public class HttpClientUtil {
             String retData = null;
             if (null != response) {
                 entity = response.getEntity();
-                retData = StringEscapeUtils.unescapeJava(StringUtils.trim(EntityUtils.toString(entity, CHARSET)));
+                retData = StringUtils.trim(EntityUtils.toString(entity, CHARSET));
+//                retData = StringEscapeUtils.unescapeJava(result);
             }
             if (HttpStatus.SC_OK == status) { // 请求成功
                 return retData;

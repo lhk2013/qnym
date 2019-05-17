@@ -22,7 +22,7 @@ public class DisDataCase {
     private Long id;
 
     @Column(name = "disdata_id")
-    private String disdataId;
+    private Long disdataId;
 
     @Column(name = "key_words")
     private String keyWords;
@@ -47,6 +47,7 @@ public class DisDataCase {
 
     @Column(name = "pl_num")
     private String plNum;
+
 
 
 }
