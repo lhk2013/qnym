@@ -24,7 +24,7 @@ public class PicJob {
     @Autowired
     private DepSevice depSevice;
 
-    @PostConstruct
+//    @PostConstruct
     public void spider() throws Exception {
 
         String token = "8a1df843b0fb13354d800932e4af2d2d";
