@@ -7,7 +7,7 @@ public class LocalTimeTest {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         LocalDateTime ldt =  LocalDateTime.now();
 
         System.out.println(ldt);
@@ -16,5 +16,14 @@ public class LocalTimeTest {
 
         String ss  = ldt.format(dfm);
         System.out.println(ss);
+
+        while (true){
+            String s =HttpClientUtil.doGet("http://10.6.21.116/robot/say?q=\\304\\343&user_id=333");
+            System.out.println(s);
+            break;
+//            Thread.sleep(10000);
+        }
+
+
     }
 }
