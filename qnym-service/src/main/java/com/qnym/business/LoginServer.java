@@ -28,9 +28,10 @@ public class LoginServer {
 	final static Logger logger = LoggerFactory.getLogger(LoginServer.class);
 
 	public static void main(String[] args) throws Exception {
+		long start = System.currentTimeMillis();
 		ConfigurableApplicationContext context = SpringApplication
             .run(LoginServer.class, args);
-		logger.info("----------->QNYM LOGIN Server Start Success<----------");
+		logger.info("----------->QNYM LOGIN Server Start Success<---------- use {} s",(System.currentTimeMillis()-start)/1000.0);
 		context.registerShutdownHook();
 	}
 
