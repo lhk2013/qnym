@@ -3,6 +3,7 @@ package com.qnym.business;
 import lombok.Data;
 
 @Data
-public class Fruit extends Object {
+public class FruitApple extends Fruit {
     private int size;
+    private String name;
 }
