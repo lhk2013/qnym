@@ -32,6 +32,7 @@ jobs:
         host: 13.231.175.114
         username: ${{ secrets.USER }}
         privateKey: ${{ secrets.MY_PRIVATE_KEY }}
+        
     - name: ls -a via ssh
       uses: garygrossgarten/github-action-ssh@release
       with:
@@ -39,6 +40,6 @@ jobs:
         username: ec2-user
         port: 22
         privateKey: ${{ secrets.MY_PRIVATE_KEY }}
-        command: ls -a;sudo su;cd /data0/; cp qnym-common-1.0.0-SNAPSHOT.jar /opt/production/webapp/;
+        command: ls -a;cd /data0/; sudo cp qnym-common-1.0.0-SNAPSHOT.jar /opt/production/webapp/;
 
 
