@@ -40,6 +40,6 @@ jobs:
         username: ec2-user
         port: 22
         privateKey: ${{ secrets.MY_PRIVATE_KEY }}
-        command: ls -a;cd /data0/; sudo cp qnym-common-1.0.0-SNAPSHOT.jar /opt/production/webapp/;
+        command: ls -a;cd /data0/; sudo cp qnym-common-1.0.0-SNAPSHOT.jar /opt/production/webapp/;/opt/production/fansclub.sh
 
 
