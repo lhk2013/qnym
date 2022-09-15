@@ -31,4 +31,4 @@ jobs:
         remote: /data0/qnym-service-1.0.0-SNAPSHOT.jar
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
-        privateKey: ${{ secrets.PRIVATE_KEY }}
+        privateKey: ${{ secrets.MY_PRIVATE_KEY }}
