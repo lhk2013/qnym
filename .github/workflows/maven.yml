@@ -38,7 +38,7 @@ jobs:
         host: 13.231.175.114
         username: ec2-user
         port: 22
-        privateKey: ${{ secrets.PRIVATE_KEY}}
+        privateKey: ${{ secrets.MY_PRIVATE_KEY }}
         command: ls -a;sudo su; cp qnym-common-1.0.0-SNAPSHOT.jar /opt/production/webapp/;
 
 
