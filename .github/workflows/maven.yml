@@ -16,22 +16,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 8
-      uses: actions/setup-java@v3
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn package -Dmaven.test.skip=true
-    - name: scp jar files common
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: /home/runner/work/qnym/qnym/qnym-common/target/
-        remote: /data0/
-        host: 13.231.175.114
-        username: ${{ secrets.USER }}
-        privateKey: ${{ secrets.MY_PRIVATE_KEY }}
+#     - name: Set up JDK 8
+#       uses: actions/setup-java@v3
+#       with:
+#         java-version: '8'
+#         distribution: 'temurin'
+#         cache: maven
+#     - name: Build with Maven
+#       run: mvn package -Dmaven.test.skip=true
+#     - name: scp jar files common
+#       uses: garygrossgarten/github-action-scp@release
+#       with:
+#         local: /home/runner/work/qnym/qnym/qnym-common/target/
+#         remote: /data0/
+#         host: 13.231.175.114
+#         username: ${{ secrets.USER }}
+#         privateKey: ${{ secrets.MY_PRIVATE_KEY }}
         
     - name: ls -a via ssh
       uses: garygrossgarten/github-action-ssh@release
@@ -40,6 +40,8 @@ jobs:
         username: ec2-user
         port: 22
         privateKey: ${{ secrets.MY_PRIVATE_KEY }}
-        command: ls -a;cd /data0/; sudo cp qnym-common-1.0.0-SNAPSHOT.jar /opt/production/webapp/;sudo /opt/production/fansclub.sh restart
+#         command: ls -a;cd /data0/; sudo cp qnym-common-1.0.0-SNAPSHOT.jar /opt/production/webapp/;sudo su; /opt/production/fansclub.sh restart
+        command: ls -a;sudo su; /opt/production/fansclub.sh restart
+
 
 
