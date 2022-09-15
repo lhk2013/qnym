@@ -27,7 +27,7 @@ jobs:
     - name: scp jar files
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: target/qnym-service-1.0.0-SNAPSHOT.jar
+        local: /home/runner/work/qnym/qnym/qnym-service/target/qnym-service-1.0.0-SNAPSHOT.jar
         remote: /data0/qnym-service-1.0.0-SNAPSHOT.jar
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
