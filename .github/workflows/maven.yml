@@ -27,9 +27,9 @@ jobs:
     - name: scp jar files common
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: /home/runner/work/qnym/qnym/qnym-common/
+        local: /home/runner/work/qnym/qnym/qnym-common/target/
         remote: /data0/
-        host: ${{ secrets.HOST }}
+        host: 13.231.175.114
         username: ${{ secrets.USER }}
         privateKey: ${{ secrets.MY_PRIVATE_KEY }}
     - name: scp jar files service
